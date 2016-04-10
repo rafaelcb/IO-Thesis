@@ -1,0 +1,36 @@
+<head prefix="og: http://ogp.me/ns#">
+    <!-- TradeDoubler site verification 2793322 -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="language" content="es">
+    <meta name="verification" content="ffaa67d61adfa50c45b59617e4767476">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-itunes-app" content="app-id=805591188">
+    <meta name="google-site-verification" content="U2g8BOpj93SMRE0447sBwo4FcSiIwl6DQ9Gwl286fv4">
+    <meta name="msvalidate.01" content="5A69DA90CD29FACC163F830FFF0EF168">
+    <meta name="description" content="lll?Todos los autobuses en un vistazo: Compare precio y comodidad aquí. Busradar.es el buscador de viajes nacionales en Europa: Fácil. Completo. Transparente.">
+    <meta content="Autobús desde Ámsterdam hasta Berlín | busradar.es" property="og:title">
+    <meta content="//busliniensuche.blob.core.windows.net/public-web3/images/preview-homepage.es-es.jpg" property="og:image">
+    <meta content="lll?Todos los autobuses en un vistazo: Compare precio y comodidad aquí. Busradar.es el buscador de viajes nacionales en Europa: Fácil. Completo. Transparente." property="og:description">
+
+    <link rel="alternate">
+
+    <link href="//busliniensuche.blob.core.windows.net/public-web3/images/touch-icon-iphone.png" rel="apple-touch-icon">
+    <link href="//busliniensuche.blob.core.windows.net/public-web3/images/touch-icon-ipad.png" rel="apple-touch-icon" sizes="76x76">
+    <link href="//busliniensuche.blob.core.windows.net/public-web3/images/touch-icon-iphone-retina.png" rel="apple-touch-icon" sizes="120x120">
+    <link href="//busliniensuche.blob.core.windows.net/public-web3/images/touch-icon-ipad-retina.png" rel="apple-touch-icon" sizes="152x152">
+    <link href="//busliniensuche.blob.core.windows.net/public-web3/scripts/data/manifest.es-es.json" rel="manifest">
+
+
+        <meta name="robots" content="noindex, follow, noodp">
+
+    <title>Autobús desde Ámsterdam hasta Berlín | busradar.es</title>
+
+    
+    
+    
+
+
+
+    </head>

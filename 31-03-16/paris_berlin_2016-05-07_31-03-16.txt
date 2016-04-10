@@ -1,0 +1,132 @@
+<head prefix="og: http://ogp.me/ns#">
+    <!-- TradeDoubler site verification 2793322 -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="language" content="es">
+    <meta name="verification" content="ffaa67d61adfa50c45b59617e4767476">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-itunes-app" content="app-id=805591188">
+    <meta name="google-site-verification" content="U2g8BOpj93SMRE0447sBwo4FcSiIwl6DQ9Gwl286fv4">
+    <meta name="msvalidate.01" content="5A69DA90CD29FACC163F830FFF0EF168">
+    <meta name="description" content="lll?Todos los autobuses en un vistazo: Compare precio y comodidad aquí. Busradar.es el buscador de viajes nacionales en Europa: Fácil. Completo. Transparente.">
+    <meta content="Autobús desde París hasta Berlín | busradar.es" property="og:title">
+    <meta content="//busliniensuche.blob.core.windows.net/public-web3/images/preview-homepage.es-es.jpg" property="og:image">
+    <meta content="lll?Todos los autobuses en un vistazo: Compare precio y comodidad aquí. Busradar.es el buscador de viajes nacionales en Europa: Fácil. Completo. Transparente." property="og:description">
+
+    <link rel="alternate">
+
+    <link href="//busliniensuche.blob.core.windows.net/public-web3/images/touch-icon-iphone.png" rel="apple-touch-icon">
+    <link href="//busliniensuche.blob.core.windows.net/public-web3/images/touch-icon-ipad.png" rel="apple-touch-icon" sizes="76x76">
+    <link href="//busliniensuche.blob.core.windows.net/public-web3/images/touch-icon-iphone-retina.png" rel="apple-touch-icon" sizes="120x120">
+    <link href="//busliniensuche.blob.core.windows.net/public-web3/images/touch-icon-ipad-retina.png" rel="apple-touch-icon" sizes="152x152">
+    <link href="//busliniensuche.blob.core.windows.net/public-web3/scripts/data/manifest.es-es.json" rel="manifest">
+
+
+        <meta name="robots" content="noindex, follow, noodp">
+
+    <title>Autobús desde París hasta Berlín | busradar.es</title>
+
+    
+    
+    
+
+
+
+    <link href="//busliniensuche.blob.core.windows.net/public-web3/styles/website2.min.css?v=14139234" rel="stylesheet" type="text/css">
+
+    
+    
+    
+
+
+        <script type="text/javascript">
+            var googletag = googletag || {}; googletag.cmd = googletag.cmd || [];
+        </script>
+
+    
+    <script type="text/javascript">
+        window.googletag.cmd.push(function() {
+            var mapLeaderTop = window.googletag.sizeMapping().addSize([300, 200], [320, 100]).addSize([480, 200], [468, 60]).addSize([970, 200], [728, 90]).addSize([0, 0], [1, 1]).build();
+            var mapLeaderBottom = window.googletag.sizeMapping().addSize([300, 200], [300, 250]).addSize([970, 200], [728, 90]).addSize([0, 0], [1, 1]).build();
+            var mapLeaderSkyscraper = window.googletag.sizeMapping().addSize([930, 400], [160, 600]).addSize([0, 0], [1, 1]).build();
+
+                
+                window.googletag.defineSlot('/18835847/busr_search_top', [320, 50], 'div-gpt-ad-1399461367466-1').defineSizeMapping(mapLeaderTop).addService(window.googletag.pubads());
+                
+                
+                window.googletag.defineSlot('/18835847/busr_search_bottom', [300, 250], 'div-gpt-ad-1399461367466-2').defineSizeMapping(mapLeaderBottom).addService(window.googletag.pubads());
+                                
+                    
+                    window.googletag.defineSlot('/18835847/busr_search_sky', [160, 600], 'div-gpt-ad-1399461367466-3').defineSizeMapping(mapLeaderSkyscraper).addService(window.googletag.pubads());
+                    
+
+            window.googletag.pubads().enableSingleRequest();
+            window.googletag.pubads()
+                .setTargeting('searchdate' ,'2016-05-07')
+                .setTargeting('dconnection', 'París|Berlín')
+                .setTargeting('departure', 'París')
+                .setTargeting('depCountry', 'FR')
+                .setTargeting('arrival', 'Berlín')
+                .setTargeting('arrCountry', 'DE')
+                .setTargeting('dist1', '1043')
+                .setTargeting('time1', '580')
+                .setTargeting('portal', 'www.busradar.es');
+            window.googletag.enableServices();
+        });
+    </script>
+
+
+
+    <!--[if lt IE 9]>
+        <link href="//busliniensuche.blob.core.windows.net/public-web3/scripts/respond-proxy.html" id="respond-proxy" rel="respond-proxy"/>
+        <link href="/scripts/polyfills/respond.proxy.gif" id="respond-redirect" rel="respond-redirect"/>
+        <script type="text/javascript" src="/scripts/polyfills/respond.js"></script>
+        <script type="text/javascript" src="/scripts/polyfills/respond.proxy.js"></script>
+        <script type="text/javascript" src="/scripts/polyfills/ie8.js"></script>
+        <script type="text/javascript" src="/scripts/polyfills/es5-shim.js"></script>
+        <script type="text/javascript" src="/scripts/polyfills/history.js"></script>
+        <script type="text/javascript" src="/scripts/polyfills/object.js"></script>
+    <![endif]-->
+
+
+    <script type="text/javascript">
+        var setupPaths = setupPaths || function(gp) {
+            gp.setBaseContentPath('//busliniensuche.blob.core.windows.net/public-web3/');
+            gp.setBasePath('/');
+            gp.setApiBasePath('/api2/');
+        };
+    </script>
+
+    
+    
+    
+    <script type="text/javascript">
+        var globalize = {
+            texts: {
+                timeRange: 'desde <FROM>:00 hr hasta <TO>:00 hr',
+                changeover: 'Conexiones para escalas en el viaje',
+                minPrice: 'desde',
+                priceOld: 'El precio puede variar según disponibilidad de asientos. Revise el precio en la página del servidor.',
+                priceNew: 'El precio puede variar según disponibilidad de asientos. Revise el precio en la página del proveedor.',
+                priceSoldOut: 'Completo',
+                priceUpdating: 'Estamos comprobando la disponibilidad',
+                betterCheaper: '{0} más barato',
+                betterFaster: '',
+                disclaimer: 'El vehículo de la fotografía puede variar en la realidad',
+                sortDeparture: 'Salida',
+                sortArrival: 'Llegada',
+                sortDuration: 'Duración',
+                sortPrice: 'Precio',
+                bookNow: 'COMPRAR',
+                bookHere: 'COMPRAR',
+                hasWifi: 'Wifi disponible',
+                hasSockets: 'Enchufes disponibles',
+                hasBookBox: 'Libros disponibles',
+                hasBathroom: 'Baño disponible',
+                hasDogSpace: 'Tiene lugar para su perro',
+                hasMagazines: 'Periódicos y revistas actuales',
+                hasFreeSnack: 'Botella de agua y aperitivo incluido',
+                hasFreeCoffee: 'Café gratuito',
+                hasMediaCenter: 'Tiene televisón',
+                hasBic</script></head>
