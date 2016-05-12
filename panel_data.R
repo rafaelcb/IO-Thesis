@@ -18,13 +18,6 @@ library(xtable)
 setwd("~/UvA - MsC Economics/Thesis/HTMLs")
 source("read_data.R")
 
-data$ArrivalTime<-(strptime(substr(data$Arrival,-1,15),"%d %b | %R",tz="Europe/Paris"))
-data$ArrivalTime[data$To == "london"]<-as.POSIXct(strptime(substr(data$Arrival,1,15),"%d %b | %R",tz="Europe/London")[data$To == "london"],tz="Europe/Paris",usetz=TRUE)
-data$DepartureTime<-(strptime(substr(data$Departure,1,15),"%d %b | %R",tz="Europe/Amsterdam"))
-data$TripLength <- data$ArrivalTime - data$DepartureTime 
-data$TripLength[data$To == "london"] <-data$TripLength[data$To == "london"] + 1
-data$id <- paste(data$trip,data$When,data$Downloaded,sep=".")
-
 group <- split(data,data$id)
 fullBuses <- sapply(group,function(x){sum(x$isFull)})
 daysToTrip<-sapply(group,function(x){x$DaysToTrip[1]})

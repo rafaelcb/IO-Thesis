@@ -24,6 +24,12 @@ data$TripLength <- data$ArrivalTime - data$DepartureTime
 data$TripLength[data$To == "london"] <-data$TripLength[data$To == "london"] + 1
 data$id <- paste(data$trip,data$When,data$Downloaded,sep=".")
 
+data$full_id <- paste(data$trip,data$When,data$Downloaded,data$Companies,data$DepartureTime,sep=".")
 #data$Companies[grepl("*urolines",data$Companies)== TRUE] <- "Eurolines"
 
 data <- data[complete.cases(data$TripLength),]
+
+price <-data[!data$isFull,]
+price$Price <- as.numeric(price$Price)
+Rank <- function(x){as.numeric(factor(x))}
+price$ranking <- unlist(tapply(price$Price,price$id,Rank))
