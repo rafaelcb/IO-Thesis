@@ -21,7 +21,7 @@ source("read_data.R")
 group <- split(data,data$id)
 fullBuses <- sapply(group,function(x){sum(x$isFull)})
 daysToTrip<-sapply(group,function(x){x$DaysToTrip[1]})
-price <- sapply(group,function(x){z <- x[!x$isFull,];mean(as.numeric(z$Price)
+price <- sapply(group,function(x){z <- x[!x$isFull,];median(as.numeric(z$Price)
                                                           ,na.rm=TRUE)})
 competitors <- sapply(group, function(x){z <- x[(!x$isFull)&(!x$multiple),];
                 NROW(unique(z$Companies))})
@@ -47,7 +47,7 @@ colnames(results) <- trips
 for(i in 1:8){
         print(trips[i])
         dat <- panel[panel$trip == trips[i],]
-        model <- ivreg(log(price) ~ competitors + time 
+        model <- ivreg(price ~ competitors + time 
                        + I(weekdays)  +when | time + I(weekdays) + when +fullBuses,
                        data = dat) 
         print(summary(model, vcov = sandwich, diagnostics = TRUE))

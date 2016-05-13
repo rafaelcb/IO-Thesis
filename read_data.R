@@ -1,9 +1,20 @@
 data <- read.csv("~/UvA - MSc Economics/Thesis/HTMLs/Data.csv",stringsAsFactors=FALSE)
 data <-data[-grep("DeutscheBahn|bokolina|Thalys|oyages-sncf.com|AirBerlin|SNCBEurope",data$Companies),]
+
+capwords <- function(s, strict = FALSE) {
+        cap <- function(s) paste(toupper(substring(s, 1, 1)),
+                                 {s <- substring(s, 2); if(strict) tolower(s) else s},
+                                 sep = "", collapse = " " )
+        sapply(strsplit(s, split = " "), cap, USE.NAMES = !is.null(names(s)))
+}
+
+data$From <- capwords(data$From)
+data$To <- capwords(data$To)
 data$trip<-paste0(paste0(data$From ,"-",""),data$To,"")
+
 data$weekday <-weekdays(as.Date(data$When))
 data$Companies <- as.factor(data$Companies)
-data <- data[data$When >="2016-05-01",]
+#data <- data[data$When >="2016-05-01",]
 data$When <-as.Date(data$When)
 
 table(data$trip,data$weekday)
@@ -33,3 +44,4 @@ price <-data[!data$isFull,]
 price$Price <- as.numeric(price$Price)
 Rank <- function(x){as.numeric(factor(x))}
 price$ranking <- unlist(tapply(price$Price,price$id,Rank))
+price$range <- tapply(price$Price,price$id,function(x){max(x)-min(x)})

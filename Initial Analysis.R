@@ -1,20 +1,10 @@
 library(dplyr)
 library(manipulate)
+library(R.utils)
 
-data <- read.csv("~/UvA - MSc Economics/Thesis/HTMLs/Data.csv",stringsAsFactors=FALSE)
-data <-data[-grep("DeutscheBahn|bokolina|Thalys|oyages-sncf.com|SNCBEurope",data$Companies),]
-data$trip<-paste0(paste0(data$From ,"-",""),data$To,"")
-data$When <- as.Date(data$When,"%d/%m/%Y")
-data$weekday <-weekdays(as.Date(data$When))
-data$Companies <- as.factor(data$Companies)
+setwd("~/UvA - MsC Economics/Thesis/HTMLs")
+source("read_data.R")
 
-table(data$trip,data$weekday)
-data$Downloaded <- substr(data$Downloaded,1,8)
-data$Downloaded <- as.Date(data$Downloaded,"%d-%m-%y")
-data$Anticipation<-data$When - data$Downloaded
-data$isFull <- data$Price=="Completo"
-duplicated<-duplicated(data.frame(data$Departure,data$Companies,data$trip,data$Downloaded))
-data<-data[!duplicated,]
 group<-group_by(data,trip,When,Downloaded)
 summary <- data.frame(summarise(group,coaches=n()))
 summary$Weekday <-weekdays(as.Date(summary$When))
@@ -39,31 +29,43 @@ fullTab
 
 temp<-prices[prices$When == "2016-05-14",]
 group<-group_by(temp,Anticipation,trip)
-tmp<-data.frame(summarize(group,avgPrice=mean(Price)))
+tmp<-data.frame(summarize(group,avgPrice=mean(Price),na.rm=TRUE))
 tmp$DaysToTrip<- - as.numeric(tmp$Anticipation)
 ggplot(tmp,aes(x=DaysToTrip,y=avgPrice))+facet_wrap(~trip,scale="free_y",ncol=4)+geom_line()
 
+prices <- prices[complete.cases(prices),]
 prices$DaysToTrip <- -as.numeric(prices$Anticipation)
 library(ggplot2)
 chart <- ggplot(prices,aes(x=DaysToTrip,y=Price))+facet_wrap(~trip,scale="free_y",ncol=2)+geom_smooth()+ theme(legend.position="none")+theme_bw()
 chart
 
-linchar <-function(date){
+linchar <-function(date, funName = "mean",scale="fixed",rescaled = FALSE){
         temp<-prices[prices$When == date,]
         group<-group_by(temp,Anticipation,trip)
-        tmp<-data.frame(summarize(group,avgPrice=mean(Price)))
+        fun <- eval(parse(text=funName))
+        tmp<-data.frame(summarize(group,avgPrice=fun(Price)))
         tmp$DaysToTrip<- - as.numeric(tmp$Anticipation)
-        ggplot(tmp,aes(x=DaysToTrip,y=avgPrice))+facet_wrap(~trip,scale="free_y")+geom_line()
+        tmp<-tmp[order(tmp$trip,-tmp$DaysToTrip),]
+        scale100 <- function(x){(x / x[NROW(x)])*100}
+        if(rescaled){
+                tmp$avgPrice = unlist(lapply(split(tmp$avgPrice,tmp$trip),scale100))
+        }
+        tit <-paste(c(capitalize(funName),"price for trip on",as.character.Date(date)),collapse= " ")
+        ggplot(tmp,aes(x=DaysToTrip,y=avgPrice))+facet_wrap(~trip,scales=scale,ncol = 2)+geom_line()+ggtitle(tit)
 }
 
-dates <- as.Date(row.names(table(data$When)))
-manipulate(linchar(dates[i]),i = slider(1,NROW(dates)))
+dates <- as.list(row.names(table(data$When)))
+funs <- list("mean","median","min","max")
+scale_y = list("fixed","free_y")
+manipulate(linchar(as.Date(When),fun,scale,rescaled),When = picker(dates),
+           fun = picker(funs),scale = picker(scale_y),rescaled =checkbox(FALSE))
 
 
 temp<-prices[prices$When == "2016-05-14",]
 group<-group_by(temp,Anticipation,trip)
 tmp<-data.frame(summarize(group,avgPrice=mean(Price)))
 tmp$DaysToTrip<- - as.numeric(tmp$Anticipation)
+
 ggplot(tmp,aes(x=DaysToTrip,y=avgPrice))+facet_wrap(~trip,scale="free_y")+geom_line()
 ggplot(tmp,aes(x=DaysToTrip,y=avgPrice))+facet_wrap(~trip,scale="free_y",columns=4)+geom_
 
