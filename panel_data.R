@@ -21,11 +21,13 @@ source("read_data.R")
 group <- split(data,data$id)
 fullBuses <- sapply(group,function(x){sum(x$isFull)})
 daysToTrip<-sapply(group,function(x){x$DaysToTrip[1]})
-price <- sapply(group,function(x){z <- x[!x$isFull,];median(as.numeric(z$Price)
+price_mean <- sapply(group,function(x){z <- x[!x$isFull,];mean(as.numeric(z$Price)
                                                           ,na.rm=TRUE)})
 competitors <- sapply(group, function(x){z <- x[(!x$isFull)&(!x$multiple),];
                 NROW(unique(z$Companies))})
 tripLength <- sapply(group,function(x){mean(x$TripLength)})
+range <- tapply(price$Price,price$id,function(x){max(x)-min(x)})
+dispersion <- tapply(price$Price,price$id,function(x){median(x)-min(x)})
 weekdays <-sapply(group,function(x){x$weekday[1]})
 tripDay <- names(fullBuses)
 panel <-colsplit(string=tripDay, pattern="[.]", 
@@ -33,8 +35,8 @@ panel <-colsplit(string=tripDay, pattern="[.]",
 panel$id <- paste(panel$trip,panel$when,".")
 panel$when <- as.Date(as.character(panel$when))
 time <- daysToTrip + 46
-panel <-cbind(panel,price, competitors, tripLength, weekdays, time,
-              fullBuses)
+panel <-cbind(panel,price_mean, competitors, tripLength, weekdays, time,
+              fullBuses,range, dispersion)
 #panel <-pdata.frame(panel, index = c("id", "time"), drop.index = TRUE, 
 #                    row.names = TRUE)
 
@@ -47,8 +49,8 @@ colnames(results) <- trips
 for(i in 1:8){
         print(trips[i])
         dat <- panel[panel$trip == trips[i],]
-        model <- ivreg(price ~ competitors + time 
-                       + I(weekdays)  +when | time + I(weekdays) + when +fullBuses,
+        model <- ivreg(price_mean ~ competitors + time 
+                       + I(weekdays)   | time + I(weekdays)  +fullBuses,
                        data = dat) 
         print(summary(model, vcov = sandwich, diagnostics = TRUE))
         results[1,i ] <- model$coefficients[2]
@@ -76,3 +78,12 @@ expensive_prop_tab <- round(prop.table(expensive_tab,2)*100,2)
 expensive_prop_tab <- expensive_prop_tab[rowSums(expensive_prop_tab)>5,]
 expensive_prop_tab <- rbind(expensive_prop_tab,Other = 100 - colSums(expensive_prop_tab))
 
+ggplot(price,aes(x=DaysToTrip,y=Price))+stat_smooth()+facet_wrap(~trip,ncol = 4)
+summary_weekday <- melt(tapply(price$Price,list(price$weekday,price$trip),mean))
+colnames(summary_weekday)<-c("weekday","trip","price")
+summary_weekday <- summary_weekday[order(summary_weekday$trip,
+                                         summary_weekday$weekday),]
+summary_weekday$norm <- as.vector(sapply(split(summary_weekday,
+                summary_weekday$trip),function(x){x$price/x$price[1]*100}))
+ggplot(summary_weekday,aes(x=weekday,y=norm,group=1))+geom_point()+geom_line()+
+        facet_wrap(~trip,ncol=4)+theme(axis.text.x = element_text(angle = 90, hjust = 1))

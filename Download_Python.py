@@ -51,9 +51,15 @@ def DownloadData():
             content = createHTML(url)
             myDirname = "C:/Users/Castrillo/Documents/UvA - MSc Economics/Thesis/HTMLs/" + today + "/"
             filepath =  myDirname + departure[i] + "_" + towards[i] + "_" + dates[j] + "_" + today + ".htm"
+            import os
+            dir = os.path.dirname(filepath)
+            try:
+                os.stat(dir)
+            except:
+                os.mkdir(dir)  
             file(filepath, "w").write(content.encode('utf-8'))
             k = k + 1
-            print "{:.0%}".format(k/360.0)
+            print "{:.1%}".format(k/360.0)
 
 
     driver.quit()

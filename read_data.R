@@ -1,3 +1,5 @@
+curr_locale <- Sys.getlocale("LC_TIME")
+
 data <- read.csv("~/UvA - MSc Economics/Thesis/HTMLs/Data.csv",stringsAsFactors=FALSE)
 data <-data[-grep("DeutscheBahn|bokolina|Thalys|oyages-sncf.com|AirBerlin|SNCBEurope",data$Companies),]
 
@@ -12,9 +14,14 @@ data$From <- capwords(data$From)
 data$To <- capwords(data$To)
 data$trip<-paste0(paste0(data$From ,"-",""),data$To,"")
 
+Sys.setlocale("LC_TIME", "English")
 data$weekday <-weekdays(as.Date(data$When))
+data$weekday<-factor(data$weekday, 
+       levels = c("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"))
+Sys.setlocale("LC_TIME",curr_locale)
+
 data$Companies <- as.factor(data$Companies)
-#data <- data[data$When >="2016-05-01",]
+data <- data[(data$When >="2016-04-29")&(data$When<=Sys.Date()+15),]
 data$When <-as.Date(data$When)
 
 table(data$trip,data$weekday)
@@ -27,6 +34,7 @@ data$multiple <- grepl("[&]",data$Companies)
 duplicated<-duplicated(data.frame(data$Departure,data$Companies,data$trip,data$Downloaded))
 data<-data[!duplicated,]
 rm(duplicated)
+
 
 data$ArrivalTime<-(strptime(substr(data$Arrival,-2,15),"%d %b | %R",tz="Europe/Paris"))
 data$ArrivalTime[data$To == "london"]<-as.POSIXct(strptime(substr(data$Arrival,1,15),"%d %b | %R",tz="Europe/London")[data$To == "london"],tz="Europe/Paris",usetz=TRUE)
@@ -44,4 +52,4 @@ price <-data[!data$isFull,]
 price$Price <- as.numeric(price$Price)
 Rank <- function(x){as.numeric(factor(x))}
 price$ranking <- unlist(tapply(price$Price,price$id,Rank))
-price$range <- tapply(price$Price,price$id,function(x){max(x)-min(x)})
+
