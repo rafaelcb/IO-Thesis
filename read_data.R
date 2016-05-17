@@ -21,7 +21,7 @@ data$weekday<-factor(data$weekday,
 Sys.setlocale("LC_TIME",curr_locale)
 
 data$Companies <- as.factor(data$Companies)
-data <- data[(data$When >="2016-04-29")&(data$When<=Sys.Date()+15),]
+data <- data[(data$When >="2016-04-29")&(data$When <=Sys.Date()+15),]
 data$When <-as.Date(data$When)
 
 table(data$trip,data$weekday)
@@ -48,8 +48,12 @@ data$full_id <- paste(data$trip,data$When,data$Downloaded,data$Companies,data$De
 
 data <- data[complete.cases(data$TripLength),]
 
+data$Price <- as.numeric(data$Price)
 price <-data[!data$isFull,]
-price$Price <- as.numeric(price$Price)
+
 Rank <- function(x){as.numeric(factor(x))}
 price$ranking <- unlist(tapply(price$Price,price$id,Rank))
 
+data$Price <- as.numeric(data$Price)
+stargazer(data,out ="C:/Users/Castrillo/Documents/UvA - MSc Economics/Thesis/Thesis - Document/img/summary_tab_all.tex"
+          ,title="Summary statistics - all data")
