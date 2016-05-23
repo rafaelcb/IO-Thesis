@@ -19,4 +19,3 @@ for(j in 1:NROW(paths)){
                             fileEncoding = "")
         }        
 }
-closeAllConnections()
